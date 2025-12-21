@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB6BF44F-181B-4B92-A4EF-EFB79ADC2580}</ProjectGuid>
+    <ProjectGuid>{ABC1EEF2-3445-4E9B-B025-117053F8F7C8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ChatApp_Kriptoloji</RootNamespace>
-    <AssemblyName>ChatApp_Kriptoloji</AssemblyName>
+    <RootNamespace>Chat_Client</RootNamespace>
+    <AssemblyName>Chat_Client</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -52,6 +52,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="KriptoYoneticisi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -79,6 +80,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

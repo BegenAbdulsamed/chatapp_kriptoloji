@@ -1,0 +1,10 @@
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\obj\Debug\Chat_Client.csproj.AssemblyReference.cache
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\obj\Debug\Chat_Client.Form1.resources
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\obj\Debug\Chat_Client.Properties.Resources.resources
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\obj\Debug\Chat_Client.csproj.GenerateResource.cache
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\obj\Debug\Chat_Client.csproj.CoreCompileInputs.cache
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\bin\Debug\Chat_Client.exe.config
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\bin\Debug\Chat_Client.exe
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\bin\Debug\Chat_Client.pdb
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\obj\Debug\Chat_Client.exe
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\Chat_Client\obj\Debug\Chat_Client.pdb

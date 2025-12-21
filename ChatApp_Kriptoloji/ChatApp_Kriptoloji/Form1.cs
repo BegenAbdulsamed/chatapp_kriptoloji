@@ -6,175 +6,150 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace ChatApp_Kriptoloji
 {
     public partial class Form1 : Form
     {
-        private TcpClient client;
-        private TcpListener listener;
-        public StreamReader STR;
-        public StreamWriter STW;
-        public string recieve;
-        public string TextToSend;
-
+        private List<TcpClient> clientList = new List<TcpClient>();
+        private TcpListener serverListener;
+        private bool isServerRunning = false;
         public Form1()
         {
             InitializeComponent();
-            backgroundWorker1.WorkerSupportsCancellation = true;
-            backgroundWorker2.WorkerSupportsCancellation = true;
-
-            IPAddress[] localIP = Dns.GetHostAddresses(Dns.GetHostName());
-            foreach (IPAddress address in localIP)
-            {
-                if (address.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    ServerIPtextBox.Text = address.ToString();
-                    break;
-                }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int port = int.Parse(ServerPORTtextBox.Text);
-                listener = new TcpListener(IPAddress.Any, port);
-                listener.Start();
-                SohbetEkranitextBox.AppendText($"Sunucu {port} portunda dinleniyor...{Environment.NewLine}");
-
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        TcpClient accepted = listener.AcceptTcpClient();
-                        this.Invoke((MethodInvoker)delegate
-                        {
-                            client = accepted;
-                            SohbetEkranitextBox.AppendText("Client1 bağlandı!" + Environment.NewLine);
-
-                            STR = new StreamReader(client.GetStream(), Encoding.UTF8);
-                            STW = new StreamWriter(client.GetStream(), Encoding.UTF8) { AutoFlush = true };
-
-                            if (!backgroundWorker1.IsBusy)
-                                backgroundWorker1.RunWorkerAsync();
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        this.Invoke((MethodInvoker)delegate
-                        {
-                            MesajtextBox.Text = "Listener hata: " + ex.Message;
-                        });
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                MesajtextBox.Text = ex.Message.ToString();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            client = new TcpClient();
-            System.Net.IPEndPoint ipEnd = new System.Net.IPEndPoint(
-                System.Net.IPAddress.Parse(ClientIPtextBox.Text.Trim()),
-                Convert.ToInt32(ClientPORTtextBox.Text.Trim())
-            );
-
-            try
-            {
-                SohbetEkranitextBox.AppendText("Servera bağlanıyor..." + Environment.NewLine);
-                client.Connect(ipEnd);
-
-                STW = new StreamWriter(client.GetStream(), Encoding.UTF8) { AutoFlush = true };
-                STR = new StreamReader(client.GetStream(), Encoding.UTF8);
-
-                if (!backgroundWorker1.IsBusy)
-                    backgroundWorker1.RunWorkerAsync();
-
-                SohbetEkranitextBox.AppendText("Client2 servera bağlandı!" + Environment.NewLine);
-            }
-            catch (Exception ex)
-            {
-                MesajtextBox.Text = ex.Message.ToString();
-            }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            var worker = sender as BackgroundWorker;
-            try
-            {
-                while (client != null && client.Connected && !worker.CancellationPending)
-                {
-                    string line = STR.ReadLine();
-                    if (line == null)
-                        break;
-
-                    this.SohbetEkranitextBox.Invoke((MethodInvoker)delegate ()
-                    {
-                        SohbetEkranitextBox.AppendText(line + Environment.NewLine);
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                this.Invoke(new MethodInvoker(delegate ()
-                {
-                    MesajtextBox.Text = ex.Message.ToString();
-                }));
-            }
+           
         }
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+           
+        }
+
+        private void btnBaslat_Click(object sender, EventArgs e)
+        {
+            if (!isServerRunning)
             {
-                if (client != null && client.Connected)
+                int port;
+                if (int.TryParse(txtPort.Text, out port))
                 {
-                    // Mesajın başına kendi ismini ekle
-                    string senderName = listener != null ? "Client1" : "Client2";
-                    string mesaj = senderName + " : " + TextToSend;
+                    // 1. Server'ı verilen portta başlatıyoruz
+                    serverListener = new TcpListener(IPAddress.Any, port);
+                    serverListener.Start();
+                    isServerRunning = true;
 
-                    STW.WriteLine(mesaj);
+                    LogEkle($"Server {port} portunda başlatıldı. İstemciler bekleniyor...");
+                    btnBaslat.Enabled = false; // İkinci kez basılmasın
 
-                    this.SohbetEkranitextBox.Invoke((MethodInvoker)(() =>
-                    {
-                        SohbetEkranitextBox.AppendText(mesaj + Environment.NewLine);
-                    }));
+                    // 2. Ana arayüz donmasın diye Client kabul etme işini arka plana (Task) atıyoruz
+                    Task.Run(() => ClientKabulEt());
                 }
                 else
                 {
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        MessageBox.Show("Gönderilemedi - bağlantı yok");
-                    }));
+                    MessageBox.Show("Lütfen geçerli bir port numarası girin.");
+                }
+            }
+        }
+        private async void ClientKabulEt()
+        {
+            try
+            {
+                while (isServerRunning)
+                {
+                    // Yeni birisi bağlanana kadar burada bekler
+                    TcpClient yeniClient = await serverListener.AcceptTcpClientAsync();
+
+                    // Bağlanan kişiyi listeye ekle
+                    clientList.Add(yeniClient);
+                    LogEkle("Yeni bir istemci bağlandı!");
+
+                    // Bu istemci için özel bir dinleme döngüsü başlat (Her client için ayrı Task)
+                    // Discard ( _ = ) kullanarak await beklemeden devam etmesini sağlıyoruz
+                    _ = Task.Run(() => ClientDinle(yeniClient));
                 }
             }
             catch (Exception ex)
             {
-                this.Invoke((MethodInvoker)(() =>
-                {
-                    MesajtextBox.Text = ex.Message.ToString();
-                }));
+                LogEkle("Hata (ClientKabulEt): " + ex.Message);
             }
         }
-        private void label1_Click(object sender, EventArgs e) { }
-        private void button3_Click(object sender, EventArgs e)
+        private void ClientDinle(TcpClient client)
         {
-            if (!string.IsNullOrWhiteSpace(MesajtextBox.Text))
+            StreamReader reader = null;
+            try
             {
-                TextToSend = MesajtextBox.Text;
+                // Client'ın ağ akışını okumak için
+                reader = new StreamReader(client.GetStream());
 
-                if (!backgroundWorker2.IsBusy)
-                    backgroundWorker2.RunWorkerAsync();
-                else
-                    MessageBox.Show("Önceki gönderim devam ediyor...");
+                while (client.Connected)
+                {
+                    // Mesaj gelmesini bekle
+                    string gelenMesaj = reader.ReadLine();
+
+                    if (gelenMesaj == null) break; // Bağlantı koptuysa döngüden çık
+
+                    // 1. Server ekranına (Log) şifreli halini bas
+                    LogEkle("Gelen Şifreli Mesaj: " + gelenMesaj);
+
+                    // 2. Diğer herkese dağıt
+                    DigerlerineGonder(gelenMesaj, client);
+                }
             }
-            MesajtextBox.Text = "";
+            catch
+            {
+                // Hata olursa (client aniden kapatırsa) buraya düşer
+            }
+            finally
+            {
+                // Temizlik işlemleri
+                clientList.Remove(client);
+                client.Close();
+                LogEkle("Bir istemci ayrıldı.");
+            }
+        }
+        private void DigerlerineGonder(string mesaj, TcpClient gonderen)
+        {
+            // Listeyi kilitliyoruz ki işlem sırasında başka biri bağlanıp listeyi bozmasın
+            lock (clientList)
+            {
+                foreach (TcpClient c in clientList)
+                {
+                    // Mesajı gönderen kişiye tekrar geri yollama, diğerlerine yolla
+                    if (c != gonderen && c.Connected)
+                    {
+                        try
+                        {
+                            StreamWriter writer = new StreamWriter(c.GetStream());
+                            writer.WriteLine(mesaj);
+                            writer.AutoFlush = true; // Tamponda bekletmeden hemen yolla
+                        }
+                        catch
+                        {
+                            // Gönderim başarısız olursa (örn. bağlantı koptuysa) hatayı yut
+                        }
+                    }
+                }
+            }
+        }
+
+        // ARAYÜZE GÜVENLİ ERİŞİM (LOGLAMA)
+        // Thread'lerden GUI'ye erişirken hata almamak için Invoke kullanıyoruz
+        private void LogEkle(string metin)
+        {
+            if (rtbLog.InvokeRequired)
+            {
+                rtbLog.Invoke(new Action<string>(LogEkle), metin);
+            }
+            else
+            {
+                rtbLog.AppendText($"[{DateTime.Now.ToLongTimeString()}] {metin}{Environment.NewLine}");
+                rtbLog.ScrollToCaret(); // En son satıra kaydır
+            }
         }
     }
 }
+
