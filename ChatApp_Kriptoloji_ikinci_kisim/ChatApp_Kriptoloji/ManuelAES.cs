@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ChatApp_Kriptoloji
 {
@@ -53,14 +50,22 @@ namespace ChatApp_Kriptoloji
 
         public static string Encrypt(string plainText, string key)
         {
+            if (string.IsNullOrEmpty(plainText))
+                throw new ArgumentException("Düz metin boş olamaz", nameof(plainText));
+
+            if (string.IsNullOrEmpty(key))
+                throw new ArgumentException("Anahtar boş olamaz", nameof(key));
+
             byte[] data = Encoding.UTF8.GetBytes(plainText);
-            // Padding (PKCS7 Mantığına benzer, 16'nın katı olmalı)
+
+            // PKCS7 Padding
             int padding = 16 - (data.Length % 16);
             byte[] paddedData = new byte[data.Length + padding];
             Array.Copy(data, paddedData, data.Length);
-            for (int i = data.Length; i < paddedData.Length; i++) paddedData[i] = (byte)padding;
+            for (int i = data.Length; i < paddedData.Length; i++)
+                paddedData[i] = (byte)padding;
 
-            // Anahtar Hazırlığı (16 Byte olmalı)
+            // Anahtar Hazırlığı (16 Byte = 128 bit)
             byte[] keyBytes = new byte[16];
             byte[] tempKey = Encoding.UTF8.GetBytes(key);
             Array.Copy(tempKey, keyBytes, Math.Min(tempKey.Length, 16));
@@ -68,6 +73,7 @@ namespace ChatApp_Kriptoloji
             byte[] encrypted = new byte[paddedData.Length];
             byte[] expandedKey = KeyExpansion(keyBytes);
 
+            // Blok blok şifreleme
             for (int i = 0; i < paddedData.Length; i += 16)
             {
                 byte[] block = new byte[16];
@@ -81,7 +87,15 @@ namespace ChatApp_Kriptoloji
 
         public static string Decrypt(string cipherText, string key)
         {
+            if (string.IsNullOrEmpty(cipherText))
+                throw new ArgumentException("Şifreli metin boş olamaz", nameof(cipherText));
+
+            if (string.IsNullOrEmpty(key))
+                throw new ArgumentException("Anahtar boş olamaz", nameof(key));
+
             byte[] data = Convert.FromBase64String(cipherText);
+
+            // Anahtar Hazırlığı
             byte[] keyBytes = new byte[16];
             byte[] tempKey = Encoding.UTF8.GetBytes(key);
             Array.Copy(tempKey, keyBytes, Math.Min(tempKey.Length, 16));
@@ -89,6 +103,7 @@ namespace ChatApp_Kriptoloji
             byte[] decrypted = new byte[data.Length];
             byte[] expandedKey = KeyExpansion(keyBytes);
 
+            // Blok blok çözme
             for (int i = 0; i < data.Length; i += 16)
             {
                 byte[] block = new byte[16];
@@ -98,21 +113,38 @@ namespace ChatApp_Kriptoloji
             }
 
             // Padding temizleme
-            int padding = decrypted[decrypted.Length - 1];
-            if (padding > 0 && padding <= 16)
+            int paddingValue = decrypted[decrypted.Length - 1];
+            if (paddingValue > 0 && paddingValue <= 16)
             {
-                byte[] unpadded = new byte[decrypted.Length - padding];
-                Array.Copy(decrypted, unpadded, unpadded.Length);
-                return Encoding.UTF8.GetString(unpadded);
+                // Padding kontrolü
+                bool validPadding = true;
+                for (int i = decrypted.Length - paddingValue; i < decrypted.Length; i++)
+                {
+                    if (decrypted[i] != paddingValue)
+                    {
+                        validPadding = false;
+                        break;
+                    }
+                }
+
+                if (validPadding)
+                {
+                    byte[] unpadded = new byte[decrypted.Length - paddingValue];
+                    Array.Copy(decrypted, unpadded, unpadded.Length);
+                    return Encoding.UTF8.GetString(unpadded);
+                }
             }
+
             return Encoding.UTF8.GetString(decrypted);
         }
 
         private static byte[] EncryptBlock(byte[] input, byte[] expandedKey)
         {
             byte[] state = (byte[])input.Clone();
+
             AddRoundKey(state, expandedKey, 0);
 
+            // 9 Ana Round
             for (int round = 1; round < 10; round++)
             {
                 SubBytes(state);
@@ -121,6 +153,7 @@ namespace ChatApp_Kriptoloji
                 AddRoundKey(state, expandedKey, round);
             }
 
+            // Final Round (MixColumns yok)
             SubBytes(state);
             ShiftRows(state);
             AddRoundKey(state, expandedKey, 10);
@@ -131,8 +164,10 @@ namespace ChatApp_Kriptoloji
         private static byte[] DecryptBlock(byte[] input, byte[] expandedKey)
         {
             byte[] state = (byte[])input.Clone();
+
             AddRoundKey(state, expandedKey, 10);
 
+            // 9 Ana Round (Ters Sırada)
             for (int round = 9; round >= 1; round--)
             {
                 InvShiftRows(state);
@@ -141,6 +176,7 @@ namespace ChatApp_Kriptoloji
                 InvMixColumns(state);
             }
 
+            // Final Round
             InvShiftRows(state);
             InvSubBytes(state);
             AddRoundKey(state, expandedKey, 0);
@@ -150,97 +186,159 @@ namespace ChatApp_Kriptoloji
 
         private static byte[] KeyExpansion(byte[] key)
         {
-            byte[] expandedKey = new byte[176];
+            byte[] expandedKey = new byte[176]; // 11 round * 16 bytes = 176 bytes
             Array.Copy(key, expandedKey, 16);
+
             int bytesGenerated = 16;
-            int rconIteration = 1;
+            int rconIteration = 0;
             byte[] temp = new byte[4];
 
             while (bytesGenerated < 176)
             {
-                for (int i = 0; i < 4; i++) temp[i] = expandedKey[bytesGenerated - 4 + i];
+                // Son 4 byte'ı kopyala
+                for (int i = 0; i < 4; i++)
+                    temp[i] = expandedKey[bytesGenerated - 4 + i];
 
+                // Her 16 byte'da bir (yeni kelime başlangıcında)
                 if (bytesGenerated % 16 == 0)
                 {
-                    // RotWord
+                    // RotWord - 1 byte sola kaydır
                     byte t = temp[0];
-                    temp[0] = temp[1]; temp[1] = temp[2]; temp[2] = temp[3]; temp[3] = t;
-                    // SubWord
-                    for (int i = 0; i < 4; i++) temp[i] = SBOX[temp[i]];
-                    // Rcon Xor
-                    temp[0] ^= RCON[rconIteration - 1]; // Rcon tablosu 0'dan başlıyor
+                    temp[0] = temp[1];
+                    temp[1] = temp[2];
+                    temp[2] = temp[3];
+                    temp[3] = t;
+
+                    // SubWord - S-Box uygula
+                    for (int i = 0; i < 4; i++)
+                        temp[i] = SBOX[temp[i]];
+
+                    // Rcon XOR
+                    temp[0] ^= RCON[rconIteration];
                     rconIteration++;
                 }
 
+                // XOR işlemi
                 for (int i = 0; i < 4; i++)
                 {
                     expandedKey[bytesGenerated] = (byte)(expandedKey[bytesGenerated - 16] ^ temp[i]);
                     bytesGenerated++;
                 }
             }
+
             return expandedKey;
         }
 
-        private static void SubBytes(byte[] state) { for (int i = 0; i < 16; i++) state[i] = SBOX[state[i]]; }
-        private static void InvSubBytes(byte[] state) { for (int i = 0; i < 16; i++) state[i] = INV_SBOX[state[i]]; }
-        private static void AddRoundKey(byte[] state, byte[] expKey, int round)
+        private static void SubBytes(byte[] state)
         {
-            for (int i = 0; i < 16; i++) state[i] ^= expKey[round * 16 + i];
+            for (int i = 0; i < 16; i++)
+                state[i] = SBOX[state[i]];
+        }
+
+        private static void InvSubBytes(byte[] state)
+        {
+            for (int i = 0; i < 16; i++)
+                state[i] = INV_SBOX[state[i]];
+        }
+
+        private static void AddRoundKey(byte[] state, byte[] expandedKey, int round)
+        {
+            for (int i = 0; i < 16; i++)
+                state[i] ^= expandedKey[round * 16 + i];
         }
 
         private static void ShiftRows(byte[] state)
         {
-            byte[] t = (byte[])state.Clone();
-            // Row 1 left 1
-            state[1] = t[5]; state[5] = t[9]; state[9] = t[13]; state[13] = t[1];
-            // Row 2 left 2
-            state[2] = t[10]; state[6] = t[14]; state[10] = t[2]; state[14] = t[6];
-            // Row 3 left 3
-            state[3] = t[15]; state[7] = t[3]; state[11] = t[7]; state[15] = t[11];
+            byte[] temp = (byte[])state.Clone();
+
+            // Row 1: 1 sola kaydır
+            state[1] = temp[5];
+            state[5] = temp[9];
+            state[9] = temp[13];
+            state[13] = temp[1];
+
+            // Row 2: 2 sola kaydır
+            state[2] = temp[10];
+            state[6] = temp[14];
+            state[10] = temp[2];
+            state[14] = temp[6];
+
+            // Row 3: 3 sola kaydır (veya 1 sağa)
+            state[3] = temp[15];
+            state[7] = temp[3];
+            state[11] = temp[7];
+            state[15] = temp[11];
         }
 
         private static void InvShiftRows(byte[] state)
         {
-            byte[] t = (byte[])state.Clone();
-            // Row 1 right 1
-            state[1] = t[13]; state[5] = t[1]; state[9] = t[5]; state[13] = t[9];
-            // Row 2 right 2
-            state[2] = t[10]; state[6] = t[14]; state[10] = t[2]; state[14] = t[6];
-            // Row 3 right 3
-            state[3] = t[7]; state[7] = t[11]; state[11] = t[15]; state[15] = t[3];
+            byte[] temp = (byte[])state.Clone();
+
+            // Row 1: 1 sağa kaydır
+            state[1] = temp[13];
+            state[5] = temp[1];
+            state[9] = temp[5];
+            state[13] = temp[9];
+
+            // Row 2: 2 sağa kaydır
+            state[2] = temp[10];
+            state[6] = temp[14];
+            state[10] = temp[2];
+            state[14] = temp[6];
+
+            // Row 3: 3 sağa kaydır (veya 1 sola)
+            state[3] = temp[7];
+            state[7] = temp[11];
+            state[11] = temp[15];
+            state[15] = temp[3];
         }
 
         private static void MixColumns(byte[] state)
         {
             for (int i = 0; i < 16; i += 4)
             {
-                byte s0 = state[i], s1 = state[i + 1], s2 = state[i + 2], s3 = state[i + 3];
+                byte s0 = state[i];
+                byte s1 = state[i + 1];
+                byte s2 = state[i + 2];
+                byte s3 = state[i + 3];
+
                 state[i] = (byte)(GaloisMul(s0, 2) ^ GaloisMul(s1, 3) ^ s2 ^ s3);
                 state[i + 1] = (byte)(s0 ^ GaloisMul(s1, 2) ^ GaloisMul(s2, 3) ^ s3);
                 state[i + 2] = (byte)(s0 ^ s1 ^ GaloisMul(s2, 2) ^ GaloisMul(s3, 3));
                 state[i + 3] = (byte)(GaloisMul(s0, 3) ^ s1 ^ s2 ^ GaloisMul(s3, 2));
             }
         }
+
         private static void InvMixColumns(byte[] state)
         {
             for (int i = 0; i < 16; i += 4)
             {
-                byte s0 = state[i], s1 = state[i + 1], s2 = state[i + 2], s3 = state[i + 3];
+                byte s0 = state[i];
+                byte s1 = state[i + 1];
+                byte s2 = state[i + 2];
+                byte s3 = state[i + 3];
+
                 state[i] = (byte)(GaloisMul(s0, 14) ^ GaloisMul(s1, 11) ^ GaloisMul(s2, 13) ^ GaloisMul(s3, 9));
                 state[i + 1] = (byte)(GaloisMul(s0, 9) ^ GaloisMul(s1, 14) ^ GaloisMul(s2, 11) ^ GaloisMul(s3, 13));
                 state[i + 2] = (byte)(GaloisMul(s0, 13) ^ GaloisMul(s1, 9) ^ GaloisMul(s2, 14) ^ GaloisMul(s3, 11));
                 state[i + 3] = (byte)(GaloisMul(s0, 11) ^ GaloisMul(s1, 13) ^ GaloisMul(s2, 9) ^ GaloisMul(s3, 14));
             }
         }
+
         private static byte GaloisMul(byte a, byte b)
         {
             byte p = 0;
             for (int i = 0; i < 8; i++)
             {
-                if ((b & 1) != 0) p ^= a;
-                bool hi_bit_set = (a & 0x80) != 0;
+                if ((b & 1) != 0)
+                    p ^= a;
+
+                bool hiBitSet = (a & 0x80) != 0;
                 a <<= 1;
-                if (hi_bit_set) a ^= 0x1B;
+
+                if (hiBitSet)
+                    a ^= 0x1B; // x^8 + x^4 + x^3 + x + 1
+
                 b >>= 1;
             }
             return p;

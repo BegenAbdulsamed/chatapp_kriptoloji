@@ -40,6 +40,9 @@
             this.btnGonder = new System.Windows.Forms.Button();
             this.lblAnahtar = new System.Windows.Forms.Label();
             this.txtAnahtar = new System.Windows.Forms.TextBox();
+            this.btnKeyExchange = new System.Windows.Forms.Button();
+            this.cmbBitBoyutu = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblIP
@@ -156,11 +159,41 @@
             this.txtAnahtar.TabIndex = 11;
             this.txtAnahtar.Text = "3";
             // 
+            // btnKeyExchange
+            // 
+            this.btnKeyExchange.Location = new System.Drawing.Point(305, 61);
+            this.btnKeyExchange.Name = "btnKeyExchange";
+            this.btnKeyExchange.Size = new System.Drawing.Size(85, 51);
+            this.btnKeyExchange.TabIndex = 12;
+            this.btnKeyExchange.Text = "Anahtar Dağıt";
+            this.btnKeyExchange.UseVisualStyleBackColor = true;
+            this.btnKeyExchange.Click += new System.EventHandler(this.btnKeyExchange_Click);
+            // 
+            // cmbBitBoyutu
+            // 
+            this.cmbBitBoyutu.FormattingEnabled = true;
+            this.cmbBitBoyutu.Location = new System.Drawing.Point(70, 115);
+            this.cmbBitBoyutu.Name = "cmbBitBoyutu";
+            this.cmbBitBoyutu.Size = new System.Drawing.Size(229, 21);
+            this.cmbBitBoyutu.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 118);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Bit Değeri:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 446);
+            this.ClientSize = new System.Drawing.Size(397, 446);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmbBitBoyutu);
+            this.Controls.Add(this.btnKeyExchange);
             this.Controls.Add(this.txtAnahtar);
             this.Controls.Add(this.lblAnahtar);
             this.Controls.Add(this.btnGonder);
@@ -195,6 +228,9 @@
         private System.Windows.Forms.Button btnGonder;
         private System.Windows.Forms.Label lblAnahtar;
         private System.Windows.Forms.TextBox txtAnahtar;
+        private System.Windows.Forms.Button btnKeyExchange;
+        private System.Windows.Forms.ComboBox cmbBitBoyutu;
+        private System.Windows.Forms.Label label1;
     }
 }
 
