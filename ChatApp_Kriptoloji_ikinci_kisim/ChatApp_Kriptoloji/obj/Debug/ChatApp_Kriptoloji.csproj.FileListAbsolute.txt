@@ -1,0 +1,10 @@
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\bin\Debug\ChatApp_Kriptoloji.exe.config
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\bin\Debug\ChatApp_Kriptoloji.exe
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\bin\Debug\ChatApp_Kriptoloji.pdb
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\obj\Debug\ChatApp_Kriptoloji.csproj.AssemblyReference.cache
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\obj\Debug\ChatApp_Kriptoloji.Form1.resources
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\obj\Debug\ChatApp_Kriptoloji.Properties.Resources.resources
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\obj\Debug\ChatApp_Kriptoloji.csproj.GenerateResource.cache
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\obj\Debug\ChatApp_Kriptoloji.csproj.CoreCompileInputs.cache
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\obj\Debug\ChatApp_Kriptoloji.exe
+C:\Users\begen\source\repos\ChatApp_Kriptoloji\ChatApp_Kriptoloji\obj\Debug\ChatApp_Kriptoloji.pdb

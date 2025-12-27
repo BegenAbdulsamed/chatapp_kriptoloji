@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Yeni Profil",
+    "Projects": [
+      {
+        "Path": "ChatApp_Kriptoloji\\ChatApp_Kriptoloji.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Chat_Client\\Chat_Client.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

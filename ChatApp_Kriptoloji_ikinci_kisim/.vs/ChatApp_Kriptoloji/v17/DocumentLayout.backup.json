@@ -1,0 +1,158 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EB6BF44F-181B-4B92-A4EF-EFB79ADC2580}|ChatApp_Kriptoloji\\ChatApp_Kriptoloji.csproj|c:\\users\\begen\\source\\repos\\chatapp_kriptoloji\\chatapp_kriptoloji\\kriptoyoneticisi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB6BF44F-181B-4B92-A4EF-EFB79ADC2580}|ChatApp_Kriptoloji\\ChatApp_Kriptoloji.csproj|solutionrelative:chatapp_kriptoloji\\kriptoyoneticisi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABC1EEF2-3445-4E9B-B025-117053F8F7C8}|Chat_Client\\Chat_Client.csproj|C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\chat_client\\kriptoyoneticisi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABC1EEF2-3445-4E9B-B025-117053F8F7C8}|Chat_Client\\Chat_Client.csproj|solutionrelative:chat_client\\kriptoyoneticisi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB6BF44F-181B-4B92-A4EF-EFB79ADC2580}|ChatApp_Kriptoloji\\ChatApp_Kriptoloji.csproj|c:\\users\\begen\\source\\repos\\chatapp_kriptoloji\\chatapp_kriptoloji\\manuelaes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB6BF44F-181B-4B92-A4EF-EFB79ADC2580}|ChatApp_Kriptoloji\\ChatApp_Kriptoloji.csproj|solutionrelative:chatapp_kriptoloji\\manuelaes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABC1EEF2-3445-4E9B-B025-117053F8F7C8}|Chat_Client\\Chat_Client.csproj|c:\\users\\begen\\source\\repos\\chatapp_kriptoloji\\chat_client\\manuelaes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABC1EEF2-3445-4E9B-B025-117053F8F7C8}|Chat_Client\\Chat_Client.csproj|solutionrelative:chat_client\\manuelaes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB6BF44F-181B-4B92-A4EF-EFB79ADC2580}|ChatApp_Kriptoloji\\ChatApp_Kriptoloji.csproj|c:\\users\\begen\\source\\repos\\chatapp_kriptoloji\\chatapp_kriptoloji\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB6BF44F-181B-4B92-A4EF-EFB79ADC2580}|ChatApp_Kriptoloji\\ChatApp_Kriptoloji.csproj|solutionrelative:chatapp_kriptoloji\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABC1EEF2-3445-4E9B-B025-117053F8F7C8}|Chat_Client\\Chat_Client.csproj|C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\chat_client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ABC1EEF2-3445-4E9B-B025-117053F8F7C8}|Chat_Client\\Chat_Client.csproj|solutionrelative:chat_client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABC1EEF2-3445-4E9B-B025-117053F8F7C8}|Chat_Client\\Chat_Client.csproj|C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\chat_client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{ABC1EEF2-3445-4E9B-B025-117053F8F7C8}|Chat_Client\\Chat_Client.csproj|solutionrelative:chat_client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB6BF44F-181B-4B92-A4EF-EFB79ADC2580}|ChatApp_Kriptoloji\\ChatApp_Kriptoloji.csproj|C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\chatapp_kriptoloji\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EB6BF44F-181B-4B92-A4EF-EFB79ADC2580}|ChatApp_Kriptoloji\\ChatApp_Kriptoloji.csproj|solutionrelative:chatapp_kriptoloji\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "KriptoYoneticisi.cs",
+              "DocumentMoniker": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\ChatApp_Kriptoloji\\KriptoYoneticisi.cs",
+              "RelativeDocumentMoniker": "ChatApp_Kriptoloji\\KriptoYoneticisi.cs",
+              "ToolTip": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\ChatApp_Kriptoloji\\KriptoYoneticisi.cs",
+              "RelativeToolTip": "ChatApp_Kriptoloji\\KriptoYoneticisi.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAwD4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-27T13:36:58.63Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ManuelAES.cs",
+              "DocumentMoniker": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\ChatApp_Kriptoloji\\ManuelAES.cs",
+              "RelativeDocumentMoniker": "ChatApp_Kriptoloji\\ManuelAES.cs",
+              "ToolTip": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\ChatApp_Kriptoloji\\ManuelAES.cs",
+              "RelativeToolTip": "ChatApp_Kriptoloji\\ManuelAES.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-27T13:36:19.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ManuelAES.cs",
+              "DocumentMoniker": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\Chat_Client\\ManuelAES.cs",
+              "RelativeDocumentMoniker": "Chat_Client\\ManuelAES.cs",
+              "ToolTip": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\Chat_Client\\ManuelAES.cs",
+              "RelativeToolTip": "Chat_Client\\ManuelAES.cs",
+              "ViewState": "AgIAAOQAAAAAAAAAAAAwwPUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-27T13:22:14.756Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\Chat_Client\\Form1.cs",
+              "RelativeDocumentMoniker": "Chat_Client\\Form1.cs",
+              "ToolTip": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\Chat_Client\\Form1.cs",
+              "RelativeToolTip": "Chat_Client\\Form1.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAcwHEAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-21T14:10:35.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Form1.cs [Tasar\u0131m]",
+              "DocumentMoniker": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\Chat_Client\\Form1.cs",
+              "RelativeDocumentMoniker": "Chat_Client\\Form1.cs",
+              "ToolTip": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\Chat_Client\\Form1.cs [Tasar\u0131m]",
+              "RelativeToolTip": "Chat_Client\\Form1.cs [Tasar\u0131m]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-21T13:55:01.01Z",
+              "EditorCaption": " [Tasar\u0131m]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "KriptoYoneticisi.cs",
+              "DocumentMoniker": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\Chat_Client\\KriptoYoneticisi.cs",
+              "RelativeDocumentMoniker": "Chat_Client\\KriptoYoneticisi.cs",
+              "ToolTip": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\Chat_Client\\KriptoYoneticisi.cs",
+              "RelativeToolTip": "Chat_Client\\KriptoYoneticisi.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAwCwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-21T14:10:08.795Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\ChatApp_Kriptoloji\\Form1.cs",
+              "RelativeDocumentMoniker": "ChatApp_Kriptoloji\\Form1.cs",
+              "ToolTip": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\ChatApp_Kriptoloji\\Form1.cs",
+              "RelativeToolTip": "ChatApp_Kriptoloji\\Form1.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAwwJ0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T21:10:00.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Form1.cs [Tasar\u0131m]",
+              "DocumentMoniker": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\ChatApp_Kriptoloji\\Form1.cs",
+              "RelativeDocumentMoniker": "ChatApp_Kriptoloji\\Form1.cs",
+              "ToolTip": "C:\\Users\\begen\\source\\repos\\ChatApp_Kriptoloji\\ChatApp_Kriptoloji\\Form1.cs [Tasar\u0131m]",
+              "RelativeToolTip": "ChatApp_Kriptoloji\\Form1.cs [Tasar\u0131m]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T21:04:02.588Z",
+              "EditorCaption": " [Tasar\u0131m]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
