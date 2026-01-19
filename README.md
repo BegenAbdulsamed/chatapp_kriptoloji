@@ -1,28 +1,3 @@
-
----
-
-## 2️⃣ chatapp_kriptoloji → SENİ AYIRAN TEKNİK PROJE (ÖNCELİK 2)
-
-Bu repo **çok değerli**, çünkü:
-- Kriptografi
-- Socket / network
-- Güvenli iletişim
-
-Bu seni “sadece API yazan” biri olmaktan çıkarır.
-
-### ŞİMDİ YAPACAĞIN:
-1. GitHub’da **chatapp_kriptoloji repo sayfasına gir**
-2. `README.md` aç
-3. İçeriği **tamamen sil**
-4. Aşağıdaki README’yi yapıştır
-
----
-
-### 📌 **chatapp_kriptoloji – README.md**
-
-```md
-# Secure Chat Application (Cryptography-Based)
-
 A backend-oriented chat application focusing on **secure communication and encryption**.
 
 ---
