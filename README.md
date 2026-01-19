@@ -1,63 +1,76 @@
-A backend-oriented chat application focusing on **secure communication and encryption**.
+# chatapp_kriptoloji — Secure Chat (Client/Server)
+
+A C# client-server chat application focused on **secure communication** and **applied cryptography**.
 
 ---
 
-## 🧠 Project Purpose
+## Why this project?
 
-This project was developed to understand:
-- Secure client-server communication
-- Cryptographic encryption techniques
-- Data confidentiality in networked systems
+The goal is to practice real-world security fundamentals:
+- Secure data transmission over networks
+- Encryption / decryption flows
+- Key handling and message integrity mindset
+- Building a correct client-server communication model
 
-The primary focus is **security and correctness**, not UI complexity.
-
----
-
-## 🔐 Security & Cryptography
-
-- Encrypted message transmission
-- Symmetric encryption for message content
-- Secure key handling mechanisms
-- Client-server architecture
+This project is intentionally **backend + security oriented** (UI is minimal).
 
 ---
 
-## 🛠️ Technical Stack
+## Architecture
+
+- **Server:** TCP listener, manages connected clients, routes messages
+- **Client:** TCP client, sends/receives messages
+- **Communication model:** Client ↔ Server (message relay)
+
+---
+
+## Cryptography Focus
+
+- Encrypt message payloads before sending
+- Decrypt payloads on receive
+- Treat key handling as a first-class concern
+
+> Notes: Exact algorithms and modes are documented in code and can be expanded (AES modes, RSA key exchange, etc.) depending on implementation.
+
+---
+
+## Tech Stack
 
 - **Language:** C#
 - **Networking:** TCP Sockets
-- **Security:** Cryptography libraries
-- **Architecture:** Client-Server Model
+- **Security:** .NET Cryptography APIs
+- **Paradigm:** Client-Server model
 
 ---
 
-## 🚀 Features
+## Features
 
-- Secure message exchange
-- Encrypted data transmission
-- Multi-client communication
-- Server-based message routing
-
----
-
-## 🎯 What I Learned
-
-- Fundamentals of cryptography in real applications
-- Secure communication over networks
-- Key management challenges
-- Designing secure backend systems
+- Multi-client messaging via server
+- Encrypted message transfer
+- Console-based logging and debugging support
 
 ---
 
-## 🧪 Running the Project
+## What I learned
 
-1. Start the server application
-2. Run client instances
-3. Establish secure communication channels
+- Socket-based communication patterns
+- Practical encryption flow integration
+- Why key management is the real challenge
+- Writing clearer, safer code in networked programs
 
 ---
 
-## 📌 Notes
+## Run
 
-This project is intentionally focused on backend security concepts.
-UI is minimal to keep attention on encryption and communication logic.
+1. Start the **server**
+2. Start one or more **clients**
+3. Connect clients to server
+4. Send messages (payload is encrypted)
+
+---
+
+## Roadmap (Optional)
+
+- Add secure key exchange (e.g., RSA handshake → AES session key)
+- Add message integrity (HMAC)
+- Add replay protection / nonce handling
